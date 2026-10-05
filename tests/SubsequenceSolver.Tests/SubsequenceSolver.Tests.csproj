@@ -25,4 +25,8 @@
     <ProjectReference Include="..\..\src\SubsequenceSolver\SubsequenceSolver.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="TestData\*.txt" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
 </Project>

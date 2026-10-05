@@ -20,47 +20,57 @@ namespace SubsequenceSolver
             int n = nums.Length;
             if (n == 0) return string.Empty;
 
-            int[] lis = new int[n];
-            int[] parent = new int[n];
+            int[] sortedValues = nums.Distinct().Order().ToArray();
+            int[] suffixLengths = new int[n];
+            int[] fenwickTree = new int[sortedValues.Length + 1];
 
-            for (int i = 0; i < n; i++)
+            for (int i = n - 1; i >= 0; i--)
             {
-                lis[i] = 1;
-                parent[i] = -1;
+                int rank = Array.BinarySearch(sortedValues, nums[i]);
+                int reversedRank = sortedValues.Length - rank;
+                suffixLengths[i] = 1 + Query(fenwickTree, reversedRank - 1);
+                Update(fenwickTree, reversedRank, suffixLengths[i]);
             }
 
-            int maxLength = 1;
-            int bestEndIndex = 0;
+            int remaining = suffixLengths.Max();
+            List<int> resultPath = new List<int>(remaining);
+            int lastValue = 0;
+            bool hasLastValue = false;
 
-            for (int i = 1; i < n; i++)
+            for (int i = 0; i < n && remaining > 0; i++)
             {
-                for (int j = 0; j < i; j++)
+                if ((!hasLastValue || nums[i] > lastValue) && suffixLengths[i] >= remaining)
                 {
-                    if (nums[i] > nums[j] && lis[j] + 1 > lis[i])
-                    {
-                        lis[i] = lis[j] + 1;
-                        parent[i] = j;
-                    }
-                }
-
-                if (lis[i] > maxLength)
-                {
-                    maxLength = lis[i];
-                    bestEndIndex = i;
+                    resultPath.Add(nums[i]);
+                    lastValue = nums[i];
+                    hasLastValue = true;
+                    remaining--;
                 }
             }
-
-            List<int> resultPath = new List<int>();
-            int curr = bestEndIndex;
-            while (curr != -1)
-            {
-                resultPath.Add(nums[curr]);
-                curr = parent[curr];
-            }
-
-            resultPath.Reverse();
 
             return string.Join(" ", resultPath);
+        }
+
+        private static int Query(int[] tree, int index)
+        {
+            int maxLength = 0;
+
+            while (index > 0)
+            {
+                maxLength = Math.Max(maxLength, tree[index]);
+                index -= index & -index;
+            }
+
+            return maxLength;
+        }
+
+        private static void Update(int[] tree, int index, int value)
+        {
+            while (index < tree.Length)
+            {
+                tree[index] = Math.Max(tree[index], value);
+                index += index & -index;
+            }
         }
     }
 }
