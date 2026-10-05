@@ -1,0 +1,11 @@
+root = true
+
+[*.cs]
+indent_style = space
+indent_size = 4
+insert_final_newline = true
+charset = utf-8-bom
+
+# Code Styles / Formatting constraints
+dotnet_sort_system_directives_first = true:suggestion
+csharp_style_expression_bodied_methods = true:suggestion

@@ -1,0 +1,27 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31919.166
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SubsequenceSolver", "src\\SubsequenceSolver\\SubsequenceSolver.csproj", "{B1D0A5A5-FF2A-4B7D-BD5F-A8D985E7EAAA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SubsequenceSolver.Tests", "tests\\SubsequenceSolver.Tests\\SubsequenceSolver.Tests.csproj", "{2CF6D0A6-31D2-4B52-AFDE-FC96B72C8C3C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B1D0A5A5-FF2A-4B7D-BD5F-A8D985E7EAAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1D0A5A5-FF2A-4B7D-BD5F-A8D985E7EAAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1D0A5A5-FF2A-4B7D-BD5F-A8D985E7EAAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1D0A5A5-FF2A-4B7D-BD5F-A8D985E7EAAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CF6D0A6-31D2-4B52-AFDE-FC96B72C8C3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CF6D0A6-31D2-4B52-AFDE-FC96B72C8C3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CF6D0A6-31D2-4B52-AFDE-FC96B72C8C3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CF6D0A6-31D2-4B52-AFDE-FC96B72C8C3C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
