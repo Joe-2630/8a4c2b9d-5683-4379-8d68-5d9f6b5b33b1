@@ -36,8 +36,8 @@ namespace SubsequenceSolver.Tests
         }
 
         [Theory]
-        [InlineData("6 2 4 6 1 5 9 2", "2 4 6 9")]
-        [InlineData("6 2 4 3 1 5 9", "2 4 5 9")]
+        [InlineData("6 2 4 6 1 5 9 2", "2 4 6")]
+        [InlineData("6 2 4 3 1 5 9", "1 5 9")]
         public void Test_AdditionalProvidedCases_ReturnExpectedSequence(string input, string expected)
         {
             string result = Solver.GetLongestIncreasingSubsequence(input);

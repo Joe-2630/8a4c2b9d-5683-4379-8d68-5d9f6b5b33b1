@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace SubsequenceSolver
@@ -17,60 +16,38 @@ namespace SubsequenceSolver
                               .Select(int.Parse)
                               .ToArray();
 
-            int n = nums.Length;
-            if (n == 0) return string.Empty;
+            return GetLongestIncreasingContiguousSequence(nums);
+        }
 
-            int[] sortedValues = nums.Distinct().Order().ToArray();
-            int[] suffixLengths = new int[n];
-            int[] fenwickTree = new int[sortedValues.Length + 1];
-
-            for (int i = n - 1; i >= 0; i--)
+        private static string GetLongestIncreasingContiguousSequence(int[] numbers)
+        {
+            if (numbers.Length == 0)
             {
-                int rank = Array.BinarySearch(sortedValues, nums[i]);
-                int reversedRank = sortedValues.Length - rank;
-                suffixLengths[i] = 1 + Query(fenwickTree, reversedRank - 1);
-                Update(fenwickTree, reversedRank, suffixLengths[i]);
+                return string.Empty;
             }
 
-            int remaining = suffixLengths.Max();
-            List<int> resultPath = new List<int>(remaining);
-            int lastValue = 0;
-            bool hasLastValue = false;
+            int bestStart = 0;
+            int bestLength = 1;
+            int currentStart = 0;
 
-            for (int i = 0; i < n && remaining > 0; i++)
+            for (int i = 1; i < numbers.Length; i++)
             {
-                if ((!hasLastValue || nums[i] > lastValue) && suffixLengths[i] >= remaining)
+                if (numbers[i] <= numbers[i - 1])
                 {
-                    resultPath.Add(nums[i]);
-                    lastValue = nums[i];
-                    hasLastValue = true;
-                    remaining--;
+                    currentStart = i;
+                }
+                else
+                {
+                    int currentLength = i - currentStart + 1;
+                    if (currentLength > bestLength)
+                    {
+                        bestStart = currentStart;
+                        bestLength = currentLength;
+                    }
                 }
             }
 
-            return string.Join(" ", resultPath);
-        }
-
-        private static int Query(int[] tree, int index)
-        {
-            int maxLength = 0;
-
-            while (index > 0)
-            {
-                maxLength = Math.Max(maxLength, tree[index]);
-                index -= index & -index;
-            }
-
-            return maxLength;
-        }
-
-        private static void Update(int[] tree, int index, int value)
-        {
-            while (index < tree.Length)
-            {
-                tree[index] = Math.Max(tree[index], value);
-                index += index & -index;
-            }
+            return string.Join(" ", numbers.Skip(bestStart).Take(bestLength));
         }
     }
 }
