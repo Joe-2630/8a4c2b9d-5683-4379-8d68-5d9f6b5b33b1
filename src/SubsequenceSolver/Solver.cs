@@ -35,15 +35,14 @@ namespace SubsequenceSolver
                 if (numbers[i] <= numbers[i - 1])
                 {
                     currentStart = i;
+                    continue;
                 }
-                else
+
+                int currentLength = i - currentStart + 1;
+                if (currentLength > bestLength)
                 {
-                    int currentLength = i - currentStart + 1;
-                    if (currentLength > bestLength)
-                    {
-                        bestStart = currentStart;
-                        bestLength = currentLength;
-                    }
+                    bestStart = currentStart;
+                    bestLength = currentLength;
                 }
             }
 
